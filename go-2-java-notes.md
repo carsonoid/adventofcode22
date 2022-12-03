@@ -45,3 +45,19 @@ System.out.println("totalScore: " + 10);
 // This feels about the same as in Go
 System.out.printf("totalScore: %d\n", 10);
 ```
+
+# Why is slicing strings so hard?
+
+Go, Python, Ruby, Rust, Javascript... this is easy in basically every other language.
+
+But there i no handy `list[start:end]` syntax or related function (as far as I can tell) in Java
+
+EDIT:
+
+I guess subList does work, but getting between arrays and lists to be able to sublist is kind of hard.
+
+TLDR: Day 3 input parsing took way longer than I would have expected;
+
+```Java
+inputList.subList(0, inputList.size() / 2),
+```
