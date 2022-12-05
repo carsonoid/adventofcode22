@@ -61,3 +61,14 @@ TLDR: Day 3 input parsing took way longer than I would have expected;
 ```Java
 inputList.subList(0, inputList.size() / 2),
 ```
+
+# Day 6: How well do `List` implementations handle ops?
+
+I did this by adding and removing items from the front of lists. At this scale it didn't matter
+and I could have written it to add and remove off the end.
+
+But this does bring up a good point. Is it as intesive to mess with the start and end of Lists in Java
+as it is in Go?  `List` has a lot of methods that really don't seem to push you away from it.
+
+Compare that to Go where the only "easy" thing to do with slices is `append`. All other ops are more
+work and syntax-heavy (see the "slice tricks" doc) which sort of push you away from them naturally.
