@@ -72,3 +72,36 @@ as it is in Go?  `List` has a lot of methods that really don't seem to push you 
 
 Compare that to Go where the only "easy" thing to do with slices is `append`. All other ops are more
 work and syntax-heavy (see the "slice tricks" doc) which sort of push you away from them naturally.
+
+
+# I wish class did name then type not type then name
+
+```java
+String Name;
+Boolean IsDir;
+Integer Size;
+
+public void Print(String s) { // ...
+```
+
+Is less intuitive to me than
+
+```go
+Name string
+IsDir string
+Size int
+
+func Print(s string) { // ...
+```
+
+# Without first class functions implementing a Dir walk sucked and felt gross
+
+I ended up passing a map down the line, I would have much preferred using a callback and
+a closure over the map.
+
+But that may just be how I'm used to doing things.
+
+
+# I hate that you can use `==` to compare strings even though you shouldn't
+
+The compiler is more than happy to let you compare strings with `==` even though it won't work in many/most cases.
