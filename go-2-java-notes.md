@@ -105,3 +105,14 @@ But that may just be how I'm used to doing things.
 # I hate that you can use `==` to compare strings even though you shouldn't
 
 The compiler is more than happy to let you compare strings with `==` even though it won't work in many/most cases.
+
+# How do I write unit tests?
+
+Step 1: Pick a dependency system
+Step 2: Pick a testing framework
+Step 3: Finally write some tests
+
+# I hate that I have to manually `break` out of switch cases
+
+In my experience, a followthrough between cases it actually much less
+common than wanting to hit a single case.
