@@ -116,3 +116,33 @@ Step 3: Finally write some tests
 
 In my experience, a followthrough between cases it actually much less
 common than wanting to hit a single case.
+
+# I like method overloading but I *hate* operator overloading
+
+Thus bug is way too easy to fall into and I do it all the time
+
+```java
+int x = 1;
+int y = 1;
+if (x == y ) {
+  //... works just fine
+}
+```
+
+```java
+Integer x = 1;
+Integer y = 1;
+if (x == y ) {
+  //... never gets called!!
+}
+```
+
+It's an easy fix, but the compiler gives you no warnings. Maybe a linter would help? But I do not have one yet.
+
+```java
+Integer x = 1;
+Integer y = 1;
+if (x.equals(y) ) {
+  //... now it works
+}
+```
