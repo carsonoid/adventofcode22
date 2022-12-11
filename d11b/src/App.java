@@ -1,0 +1,58 @@
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
+
+public class App {
+
+    public static void main(String[] args) throws Exception {
+        List<String> lines = Files.readAllLines(Paths.get(args[0]));
+
+        List<Monkey> monkeys = new ArrayList<>();
+        for (var x = 0; x < lines.size();) {
+            var next = x + 7;
+            if (lines.size() <= x + 5) {
+                break;
+            }
+
+            var monkey = new Monkey(lines.subList(x, next - 1));
+            monkeys.add(monkey);
+            x = next;
+        }
+
+        Long commonDivisor = Long.parseLong("1");
+        for (var monkey : monkeys) {
+            commonDivisor *= monkey.testDivisor;
+        }
+
+        for (var i = 0; i < 10000; i++) {
+            for (var monkey : monkeys) {
+                while (true) {
+                    var item = monkey.InspectNext(commonDivisor);
+                    if (item == -1) {
+                        break;
+                    }
+                    if (item % monkey.testDivisor == 0) {
+                        monkeys.get(monkey.trueDest).items.add(item);
+                    } else {
+                        monkeys.get(monkey.falseDest).items.add(item);
+                    }
+                }
+            }
+
+            // System.out.println("Round " + (i + 1));
+            // for (var monkey : monkeys) {
+            // System.out.printf("%s | %d\n", monkey.items, monkey.inspectionCount);
+            // }
+        }
+
+        List<Long> counts = new ArrayList<>();
+        for (var monkey : monkeys) {
+            counts.add(Long.valueOf(monkey.inspectionCount));
+        }
+        counts.sort(null);
+        System.out.println(counts);
+
+        System.out.println(counts.get(counts.size() - 1) * counts.get(counts.size() - 2));
+    }
+}

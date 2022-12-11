@@ -46,6 +46,14 @@ System.out.println("totalScore: " + 10);
 System.out.printf("totalScore: %d\n", 10);
 ```
 
+And it quite easily leads you to this bug. Which is possible thanks to operator overloading (which I do not like, see below)
+
+```java
+for (var i = 0; i< 10; i++) {
+  System.out.Println("round "+ i + 1)
+}
+```
+
 # Why is slicing strings so hard?
 
 Go, Python, Ruby, Rust, Javascript... this is easy in basically every other language.
@@ -146,3 +154,13 @@ if (x.equals(y) ) {
   //... now it works
 }
 ```
+
+# How big is an Integer?
+
+My experience with Go, coupled with the idea that `Integer` is a class and not a low level type
+really made me expect that it would be a 64 bit integer on a 64 bit system.
+
+I get why, for historical reasons, this is not the case. But I also really hate how easily a buffer
+overflow could happen. If I was using rust like I did last year, that error would have been caught automatically.
+
+Also... it sucks that there are no built-in uint data types.
