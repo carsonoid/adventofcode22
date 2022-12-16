@@ -164,3 +164,33 @@ I get why, for historical reasons, this is not the case. But I also really hate 
 overflow could happen. If I was using rust like I did last year, that error would have been caught automatically.
 
 Also... it sucks that there are no built-in uint data types.
+
+# I continue to hate type coercion
+
+```java
+int X = 3244277;
+int Y = 2973564;
+System.out.println(X * 4000000 + Y);
+```
+
+Returns the wrong value because the Integers are 32 bit;
+
+You would think this fixes it:
+
+```java
+int X = 3244277;
+int Y = 2973564;
+long result = X * 4000000 + Y;
+System.out.println(result);
+```
+
+But no... the coersion happens *before* the integer is assigned to a `long`. So you have to go further.
+One way is to assign X to long before doing the math.
+
+```java
+int X = 3244277;
+int Y = 2973564;
+long result = X;
+result = result * 4000000 + Y;
+System.out.println(result);
+```
