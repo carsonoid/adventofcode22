@@ -13,8 +13,6 @@ public class App {
             numbers.add(new IntPtr(line));
         }
 
-        System.out.println(35 % 9);
-
         List<IntPtr> data = new ArrayList<>(numbers);
 
         System.out.println(data);
@@ -25,25 +23,14 @@ public class App {
             var elem = data.get(epos);
             // System.out.printf("%s moves\n", elem);
 
-            // if (elem.value == 0) {
-            // System.out.println("Found it");
-            // }
-
             var pos = data.indexOf(elem);
             if (pos == -1) {
                 throw new Exception("Element not found");
             }
 
-            if (elem.value == -4157) {
-                System.out.println("Found it");
-            }
-
-            var moveTo = 0;
+            var moveTo = (pos + elem.value) % (data.size() - 1);
             if (elem.value > 0) {
-                moveTo = (pos + elem.value) % (data.size() - 1);
                 moveTo++; // move past the element we're moving to
-            } else {
-                moveTo = (pos + elem.value) % (data.size() - 1);
             }
             if (moveTo < 0) {
                 moveTo = data.size() + moveTo;
