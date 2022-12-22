@@ -29,7 +29,7 @@ public class App {
             }
 
             var moveTo = (pos + elem.value) % (data.size() - 1);
-            if (elem.value > 0) {
+            if (moveTo > pos) {
                 moveTo++; // move past the element we're moving to
             }
             if (moveTo < 0) {
@@ -59,9 +59,9 @@ public class App {
             }
         }
 
-        var x = data.get((pos + 1000) % (data.size() - 1));
-        var y = data.get((pos + 2000) % (data.size() - 1));
-        var z = data.get((pos + 3000) % (data.size() - 1));
+        var x = data.get((pos + 1000) % (data.size()));
+        var y = data.get((pos + 2000) % (data.size()));
+        var z = data.get((pos + 3000) % (data.size()));
 
         System.out.println(data);
 
@@ -71,17 +71,10 @@ public class App {
 }
 
 class IntPtr {
-    static char idCounter = 'a';
-
     public int value;
-
-    // the id isn't needed for uniqueness
-    // but it's useful for debugging duplicate ints
-    public char id;
 
     public IntPtr(String value) {
         this.value = Integer.parseInt(value);
-        this.id = idCounter++;
     }
 
     public String toString() {
