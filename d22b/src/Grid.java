@@ -126,7 +126,7 @@ public class Grid implements Iterable<GridElement> {
                     // TID: G
                     dirChange = 'W';
                     x = 99;
-                    y = y + 100;
+                    y = 149 - y;
                 } else if (x == 99 && y >= 50 && y <= 99) {
                     // TID: H
                     dirChange = 'N';
@@ -135,7 +135,7 @@ public class Grid implements Iterable<GridElement> {
                 } else if (x == 99 && y >= 100 && y <= 149) {
                     // TID: I
                     dirChange = 'W';
-                    y = y - 100;
+                    y = 149 - y;
                     x = 149;
                 } else if (x == 49 && y >= 150) {
                     // TID: J
@@ -151,7 +151,7 @@ public class Grid implements Iterable<GridElement> {
                     // TID: K
                     dirChange = 'E';
                     x = 0;
-                    y = y + 100;
+                    y = 149-y ;
                 } else if (x == 50 && y >= 50 && y <= 99) {
                     // TID: L
                     dirChange = 'S';
@@ -161,7 +161,7 @@ public class Grid implements Iterable<GridElement> {
                     // TID: M
                     dirChange = 'E';
                     x = 50;
-                    y = y - 100;
+                    y = 149-y;
                 } else if (x == 0 && y >= 150 && y <= 199) {
                     // TID: N
                     dirChange = 'S';
