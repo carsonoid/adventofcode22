@@ -162,7 +162,7 @@ public class Grid implements Iterable<GridElement> {
                     dirChange = 'E';
                     x = 50;
                     y = y - 100;
-                } else if (x == 0 && y >= 150 && y <= 200) {
+                } else if (x == 0 && y >= 150 && y <= 199) {
                     // TID: N
                     dirChange = 'S';
                     x = y - 100;
