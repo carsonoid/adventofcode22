@@ -1,9 +1,13 @@
-# adventofcode22
+# Advent of Code 2022
 
 Now with more Java ☕☕☕
 
+## Viewing tThe Slides
 
-## NOTES
+This repo includes a short presentation on on my thoughts as a Go developer writing Java.
 
-In order to both keep the code Java-esq *and* each day independent: days starting from 9
-will include copies of classes from previous days.
+It uses `go present` to view the slides and code. Run it by installing the `present` tool and running:
+
+```bash
+present -use_playground=false -base theme
+```

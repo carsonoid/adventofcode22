@@ -1,0 +1,200 @@
+# Notes From A Go Dev Writing Java
+
+Carson Anderson
+DevX-O, Weave
+@carson_ops
+
+https://github.com/carsonoid/adventofcode22
+
+## Printing
+
+## Idiomatic Go printing
+
+Uses variadic arguments which makes adding clean:
+
+.code go-samples/main.go /^func goPrint/,/^}/
+
+## Java has a different way to do this
+
+.code java-samples/src/App.java /^    public static void printExamples/,/^    }/
+
+All this quite easily leads you to this bug. Which is possible thanks to type coercion.
+
+.code java-samples/src/App.java /^    public static void printlnExampleBug/,/^    }/
+
+## Literal Data
+
+## Go literals are great!
+
+Go has really one way to initialize slices and maps and basically all data types. And it's easy to mix them:
+
+.code go-samples/main.go /^func goLiterals/,/^}/
+
+## Java literals can get ugly
+
+.code java-samples/src/App.java /^    public static void literalsBeforeJava9/,/^    }/
+
+## Cleaner list "literals" are possible but have unexpected behaviors
+
+.code java-samples/src/App.java /^    public static void listLiteralAlternatives/,/^    }/
+
+.link https://www.baeldung.com/java-init-list-one-line Ref: https://www.baeldung.com/java-init-list-one-line
+
+## Cleaner map "literals" are possible as well
+
+.code java-samples/src/App.java /^    public static void mapLiteralAlternatives/,/^    }/
+
+.link https://www.baeldung.com/java-initialize-hashmap Ref: https://www.baeldung.com/java-initialize-hashmap
+
+## More Complex Examples
+
+.code java-samples/src/App.java /^    public static void nestedMapListAlternatives/,/^    }/
+
+## Slicing
+
+## Why is it so hard to slice lists?
+
+Go, Python, Ruby, Rust, Javascript... this is easy in basically every other language.
+
+But there i no handy `list[start:end]` syntax or related function (as far as I can tell) in Java.
+
+This sugar even works across types reliably:
+
+.code go-samples/main.go /^func goLists/,/^}/
+
+## Java methods change a lot based on root data type
+
+.code java-samples/src/App.java /^    public static void sublists/,/^    }/
+
+## `List` implementations are radically different
+
+## The Java List interface is really vague
+
+My Day 6 solution requres adding and removing items from the front of lists. At this scale it didn't matter.
+And I could have written it to add and remove off the end but didn't.
+
+.code java-samples/src/App.java /^    public static void listOps/,/^    }/
+
+## Go often makes expensive things ugly and obvious
+
+.code go-samples/main.go /^func listOps/,/^}/
+
+.link https://github.com/golang/go/wiki/SliceTricks Ref: https://github.com/golang/go/wiki/SliceTricks
+
+## I really wish variable-type order was swapped
+
+## Java uses Type then Name
+
+.code java-samples/src/App.java /START VARS OMIT/,/END VARS OMIT/
+
+## Go Name then Type just makes more sense to me
+
+.code go-samples/main.go /START VARS OMIT/,/END VARS OMIT/
+
+## First class functions are amazing
+
+## Walking a multiple dimensional array in Go
+
+.code go-samples/main.go /START FCF OMIT/,/END FCF OMIT/
+
+## Walking a multiple dimensional array in Java
+
+.code java-samples/src/App.java /FCF1 OMIT/,/FCF2 OMIT/
+
+## Walking a multiple dimensional array in Java
+
+.code java-samples/src/App.java /FCF2 OMIT/,/FCF3 OMIT/
+
+## `==` is dangerous
+
+## Java `==` comparisons work
+
+.code java-samples/src/App.java /^    public static void compareStrings/,/^    }/
+
+.code java-samples/src/App.java /^    public static void compareExamples1/,/^    }/
+
+## Until they don't
+
+.code java-samples/src/App.java /^    public static void compareStrings/,/^    }/
+
+.code java-samples/src/App.java /^    public static void compareExamples2/,/^    }/
+
+## Go makes this a bit better
+
+.code go-samples/main.go /^func compareExamples/,/^}/
+
+## Gripe: Unit testing overhead
+
+Question: How do I write some unit tests?
+
+Answer:
+
+* Step 1: Pick a dependency system
+* Step 2: Pick a testing framework
+* Step 3: Get your deps all set up
+* Step 4: Finally write some tests
+
+## I hate that I have to manually `break` out of switch cases
+
+## Java has an implicit fallthrough
+
+In my experience, a followthrough between cases it actually much less
+common than wanting to hit a single case.
+
+.code java-samples/src/App.java /^    public static void switchExample/,/^    }/
+
+## Go keeps the common case clean
+
+.code go-samples/main.go /^func switchExample/,/^}/
+
+## How big is an Integer?
+
+My experience with Go, coupled with the idea that `Integer` is a class and not a low level type
+really made me expect that it would be a 64 bit integer on a 64 bit system.
+
+I get why, for historical reasons, this is not the case. But I also really hate how easily a buffer
+overflow could happen. If I was using rust like I did last year, that error would have been caught automatically.
+
+Also... it sucks that there are no built-in `uint` data types.
+
+> NOTE: Rust does this better than both. It flat-out panics if there is an overflow at runtime
+
+## Related: I continue to hate type coercion
+
+```java
+int X = 3244277;
+int Y = 2973564;
+System.out.println(X * 4000000 + Y);
+```
+
+Returns the wrong value because the Integers are 32 bit;
+
+You would think this fixes it:
+
+```java
+int X = 3244277;
+int Y = 2973564;
+long result = X * 4000000 + Y;
+System.out.println(result);
+```
+
+But no... the coersion happens *before* the integer is assigned to a `long`. So you have to go further.
+One way is to assign X to long before doing the math.
+
+```java
+int X = 3244277;
+int Y = 2973564;
+long result = X;
+result = result * 4000000 + Y;
+System.out.println(result);
+```
+
+## I like method overloading
+
+## Finally, something I like from Java
+
+.code java-samples/src/App.java /START OVERLOAD OMIT/,/END OVERLOAD OMIT/
+
+## Go makes us create a lot of new names and that is ugly
+
+.code go-samples/main.go /START OVERLOAD OMIT/,/END OVERLOAD OMIT/
